@@ -1,15 +1,30 @@
 import DropSection from '../DropdownMenu';
 
-function DropdownMenuSection() {
+function DropdownMenuSection({ 
+  windSpeedOptions, 
+  temperatureOptions, 
+  selectedWindSpeed, 
+  selectedTemperature,
+  onWindSpeedChange,
+  onTemperatureChange 
+}) {
   return (
     <>
       <div className='windSpeed'>
         <div>Wind speed unit: </div>
-        <DropSection />
+        <DropSection
+          options={windSpeedOptions}
+          value={selectedWindSpeed}
+          onChange={onWindSpeedChange}
+        />
       </div>
       <div className='tUnit'>
         <div>Temperature unit: </div>
-        <DropSection />
+        <DropSection
+          options={temperatureOptions}
+          value={selectedTemperature}
+          onChange={onTemperatureChange}
+        />
       </div>
     </>
   );

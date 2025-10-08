@@ -1,7 +1,11 @@
-function DropSection() {
+function DropSection({ options, value, onChange }) {
   return (
-    <select>
-      <option>M/s</option>
+    <select value={value} onChange={(e) => onChange(e.target.value)}>
+     {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
     </select>
   );
 }
