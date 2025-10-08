@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import './App.css'
+import './App.css';
+import CurrentWeather from './components/CurrentWeather';
 
 function App() {
-
   return (
     <>
+      <CurrentWeather />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
