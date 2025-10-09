@@ -2,25 +2,57 @@ import { Component } from 'react';
 import DropdownMenuSection from '../DropdownMenuSection';
 import WeatherDisplay from '../WeatherDisplay';
 import CONSTANTS from '../../constants';
+import getWeather from '../../api';
 
 class CurrentWeather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedWindSpeed: 'M/s',
+      weatherData: null,
+      isFetching: false,
+      error: null,
+      selectedWindSpeed: 'm/s',
       selectedTemperature: '°C',
     };
   }
 
+  loadWeather = () => {
+    this.setState({ isFetching: true });
+
+    getWeather()
+      .then((data) =>
+        this.setState({
+          weatherData: {
+            temperature: data.current.temperature_2m,
+            windSpeed: data.current.wind_speed_10m,
+          },
+        })
+      )
+      .catch((e) => this.setState({ error: e }))
+      .finally(() => this.setState({ isFetching: false }));
+  };
+
+  componentDidMount() {
+    this.loadWeather();
+  }
+
   render() {
+    const {
+      weatherData,
+      isFetching,
+      error,
+      selectedWindSpeed,
+      selectedTemperature,
+    } = this.state;
+
     return (
       <>
         <div>
           <DropdownMenuSection
             windSpeedOptions={CONSTANTS.WINDSPEED}
             temperatureOptions={CONSTANTS.TEMPERATURE}
-            selectedWindSpeed={this.state.selectedWindSpeed}
-            selectedTemperature={this.state.selectedTemperature}
+            selectedWindSpeed={selectedWindSpeed}
+            selectedTemperature={selectedTemperature}
             onWindSpeedChange={(value) =>
               this.setState({ selectedWindSpeed: value })
             }
@@ -29,12 +61,19 @@ class CurrentWeather extends Component {
             }
           />
         </div>
-        <div>
-          <WeatherDisplay
-            windSpeedUnit={this.state.selectedWindSpeed}
-            temperatureUnit={this.state.selectedTemperature}
-          />
-        </div>
+
+        {error && <div>!!!Error loading weather!!!</div>}
+        {isFetching && <div>Loading weather, please wait!</div>}
+
+        {!error && !isFetching && weatherData && (
+          <div>
+            <WeatherDisplay
+              weatherData={weatherData}
+              windSpeedUnit={selectedWindSpeed}
+              temperatureUnit={selectedTemperature}
+            />
+          </div>
+        )}
       </>
     );
   }
