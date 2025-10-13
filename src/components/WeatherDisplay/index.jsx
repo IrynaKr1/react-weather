@@ -1,4 +1,5 @@
 import { FaTemperatureLow, FaWind } from 'react-icons/fa6';
+import styles from './WeatherDisplay.module.scss';
 
 function WeatherDisplay({ weatherData, windSpeedUnit, temperatureUnit }) {
   const displayTemperature = convertTemperature(
@@ -14,17 +15,21 @@ function WeatherDisplay({ weatherData, windSpeedUnit, temperatureUnit }) {
   );
 
   return (
-    <>
-      <h1>Current Weather</h1>
-      <FaTemperatureLow />
-      <p>
-        {displayWindSpeed.toFixed(1)} {windSpeedUnit}
-      </p>
-      <FaWind />
-      <p>
-        {displayTemperature.toFixed(1)} {temperatureUnit}
-      </p>
-    </>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Current Weather</h1>
+      <div className={styles.weatherItem}>
+        <FaTemperatureLow className={styles.icon} />
+        <span className={styles.value}>
+          {displayWindSpeed.toFixed(1)} {windSpeedUnit}
+        </span>
+      </div>
+      <div className={styles.weatherItem}>
+        <FaWind className={styles.icon} />
+        <span className={styles.value}>
+          {displayTemperature.toFixed(1)} {temperatureUnit}
+        </span>
+      </div>
+    </div>
   );
 
   function convertTemperature(value, fromUnit, toUnit) {

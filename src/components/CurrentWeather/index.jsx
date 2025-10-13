@@ -3,6 +3,7 @@ import DropdownMenuSection from '../DropdownMenuSection';
 import WeatherDisplay from '../WeatherDisplay';
 import CONSTANTS from '../../constants';
 import getWeather from '../../api';
+import styles from './CurrentWeather.module.scss';
 
 class CurrentWeather extends Component {
   constructor(props) {
@@ -46,8 +47,8 @@ class CurrentWeather extends Component {
     } = this.state;
 
     return (
-      <>
-        <div>
+      <div className={styles.container}>
+        <div className={styles.settingsSection}>
           <DropdownMenuSection
             windSpeedOptions={CONSTANTS.WINDSPEED}
             temperatureOptions={CONSTANTS.TEMPERATURE}
@@ -62,19 +63,19 @@ class CurrentWeather extends Component {
           />
         </div>
 
-        {error && <div>!!!Error loading weather!!!</div>}
-        {isFetching && <div>Loading weather, please wait!</div>}
+        <div className={styles.weatherSection}>
+          {error && <div>!!!Error loading weather!!!</div>}
+          {isFetching && <div>Loading weather, please wait!</div>}
 
-        {!error && !isFetching && weatherData && (
-          <div>
+          {!error && !isFetching && weatherData && (
             <WeatherDisplay
               weatherData={weatherData}
               windSpeedUnit={selectedWindSpeed}
               temperatureUnit={selectedTemperature}
             />
-          </div>
-        )}
-      </>
+          )}
+        </div>
+      </div>
     );
   }
 }

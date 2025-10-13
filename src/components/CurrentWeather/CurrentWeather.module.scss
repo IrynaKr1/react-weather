@@ -1,0 +1,42 @@
+body{
+    padding: 10px;
+}
+
+.container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #5b8fd8 0%, #7ba3e0 100%);
+  border-radius: 24px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.settingsSection {
+  flex: 1;
+  background: rgba(173, 216, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+}
+
+.weatherSection {
+  flex: 1;
+  background: rgba(173, 216, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+  }
+}

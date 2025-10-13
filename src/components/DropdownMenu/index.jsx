@@ -1,7 +1,13 @@
+import styles from './DropdownMenu.module.scss';
+
 function DropSection({ options, value, onChange }) {
   return (
-    <select value={value} onChange={(e) => onChange(e.target.value)}>
-     {options.map((option) => (
+    <select
+      className={styles.select}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>

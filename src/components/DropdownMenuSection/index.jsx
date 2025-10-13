@@ -1,32 +1,33 @@
+import styles from './DropdownMenuSection.module.scss';
 import DropSection from '../DropdownMenu';
 
-function DropdownMenuSection({ 
-  windSpeedOptions, 
-  temperatureOptions, 
-  selectedWindSpeed, 
+function DropdownMenuSection({
+  windSpeedOptions,
+  temperatureOptions,
+  selectedWindSpeed,
   selectedTemperature,
   onWindSpeedChange,
-  onTemperatureChange 
+  onTemperatureChange,
 }) {
   return (
-    <>
-      <div className='windSpeed'>
-        <div>Wind speed unit: </div>
+    <div className={styles.container}>
+      <div className={styles.dropdownGroup}>
+        <label className={styles.label}>Wind speed unit:</label>
         <DropSection
           options={windSpeedOptions}
           value={selectedWindSpeed}
           onChange={onWindSpeedChange}
         />
       </div>
-      <div className='tUnit'>
-        <div>Temperature unit: </div>
+      <div className={styles.dropdownGroup}>
+        <label className={styles.label}>Temperature unit:</label>
         <DropSection
           options={temperatureOptions}
           value={selectedTemperature}
           onChange={onTemperatureChange}
         />
       </div>
-    </>
+    </div>
   );
 }
 
