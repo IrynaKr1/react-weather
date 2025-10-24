@@ -37,6 +37,12 @@ class CurrentWeather extends Component {
     this.loadWeather();
   }
 
+  handleWindSpeedChange = (value) =>
+    this.setState({ selectedWindSpeed: value });
+
+  handleTemperatureChange = (value) =>
+    this.setState({ selectedTemperature: value });
+
   render() {
     const {
       weatherData,
@@ -54,12 +60,8 @@ class CurrentWeather extends Component {
             temperatureOptions={CONSTANTS.TEMPERATURE}
             selectedWindSpeed={selectedWindSpeed}
             selectedTemperature={selectedTemperature}
-            onWindSpeedChange={(value) =>
-              this.setState({ selectedWindSpeed: value })
-            }
-            onTemperatureChange={(value) =>
-              this.setState({ selectedTemperature: value })
-            }
+            onWindSpeedChange={this.handleWindSpeedChange}
+            onTemperatureChange={this.handleTemperatureChange}
           />
         </div>
 
